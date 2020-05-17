@@ -1,5 +1,5 @@
 function updateDemoAndCode(){
-  let unique = document.getElementById('unique').value;
+  let unique = document.getElementById('unique').value.replace(/\s/g, '');;
   let title = document.getElementById('sectionTitle').value;
   let subString = document.getElementById('subTitle').value;
   let copyString = document.getElementById('copyString').value;
@@ -17,7 +17,7 @@ function updateDemoAndCode(){
   }
 
  finalString += `<div style="position:relative">
-      <textarea id="clone-${unique}" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
+      <textarea readonly id="clone-${unique}" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
       <button id="copy-${unique}" style="background-color:#CE1126; color:#FFF; border-radius:5px 0px 0px 5px;display:inline-block;position:absolute;right:0px; top:1px; padding:0px 10px;border: solid #000 2px; cursor:pointer; box-shadow:inset 2px 0px 3px #e34;text-shadow:0px 1px 1px #000;outline:none;">
           Copy
       </button>
@@ -27,6 +27,7 @@ function updateDemoAndCode(){
       copyButton${unique}.addEventListener("click", () => {
           let tArea${unique} = document.getElementById("clone-${unique}");
           tArea${unique}.select();
+          tArea${unique}.setSelectionRange(0, 99999);
           document.execCommand('copy');
           copyButton${unique}.innerHTML = "Copied to Clipboard";
           document.getSelection().removeAllRanges();
@@ -36,10 +37,9 @@ function updateDemoAndCode(){
       });
   </script>`;
 
-  let demoString = `${titleArea}
-  ${subtitleArea}
+  let demoString = `${titleArea} ${subtitleArea}
   <div style="position:relative">
-      <textarea id="clone" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
+      <textarea readonly id="clone" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
       <button id="copy" style="background-color:#CE1126; color:#FFF; border-radius:5px 0px 0px 5px;display:inline-block;position:absolute;right:0px; top:1px; padding:0px 10px;border: solid #000 2px; cursor:pointer; box-shadow:inset 2px 0px 3px #e34;text-shadow:0px 1px 1px #000;outline:none;">
           Copy
       </button>
@@ -47,47 +47,47 @@ function updateDemoAndCode(){
 
   document.getElementById('demoWrapper').innerHTML = demoString;
   document.getElementById('codeblock').value = finalString;
-  reloadBinding();
 }
 
 updateDemoAndCode();
 
-document.getElementById('unique').addEventListener("input", ()=>{
-  updateDemoAndCode();
-});
-document.getElementById('sectionTitle').addEventListener("input", ()=>{
-  updateDemoAndCode();
-});
-document.getElementById('subTitle').addEventListener("input", ()=>{
-  updateDemoAndCode();
-});
-document.getElementById('copyString').addEventListener("input", ()=>{
-  updateDemoAndCode();
+document.querySelectorAll("#settings input").forEach((item, i) => {
+  item.addEventListener("input",()=>{
+    updateDemoAndCode();
+  })
 });
 
-function reloadBinding(){
-  let copyButton = document.getElementById("copy");
-  copyButton.addEventListener("click", () => {
-      let tArea = document.getElementById("clone");
-      tArea.select();
-      document.execCommand('copy');
-      copyButton.innerHTML = "Copied to Clipboard";
-      document.getSelection().removeAllRanges();
-      setTimeout(() => {
-          copyButton.innerHTML = "Copy";
-      }, 500);
-    });
+//takes a text area and copies its text, then calls done copying.
+function copyToClipboard(textAreaID, doneCopying){
+  let tArea = document.getElementById(textAreaID);
+  tArea.select();
+  tArea.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  document.getSelection().removeAllRanges();
+  doneCopying();
 }
 
+//Listen for a click in the dynamic demo area
+document.body.addEventListener("click", (event)=>{
+  if (event.srcElement.id == "copy"){
+    copyToClipboard("clone", ()=>{
+      event.srcElement.innerHTML = "Copied to Clipboard";
+
+      setTimeout(() => {
+            event.srcElement.innerHTML = "Copy";
+      }, 500);
+    });
+  }
+});
+
+//Copy the code snippet for Moodle
 let codeCopy = document.getElementById("copyCodeSnippet")
 codeCopy.addEventListener("click", ()=>{
-  let codeArea = document.getElementById('codeblock');
-  codeArea.select();
-  document.execCommand('copy');
-  codeCopy.innerHTML = "Copied in Clipboard";
-  document.getSelection().removeAllRanges();
-  setTimeout(()=>{
-    codeCopy.innerHTML = "Copy the Code";
-  }, 500)
+  copyToClipboard("codeblock", ()=>{
+    codeCopy.innerHTML = "Copied in Clipboard";
 
-})
+    setTimeout(()=>{
+      codeCopy.innerHTML = "Copy the Code";
+    }, 500);
+  });
+});
