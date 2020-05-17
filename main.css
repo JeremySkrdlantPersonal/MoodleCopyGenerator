@@ -1,0 +1,63 @@
+body, h1{
+  margin: 0px;
+  padding: 0px;
+}
+
+h1, h2{
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+section{
+  padding: 20px;
+  position: relative;
+}
+
+input{
+  width:100%;
+  white-space: nowrap;
+  margin: 10px 0px 15px 0px;
+  font-size: 14px;
+}
+
+textarea{
+  width: 100%;
+}
+
+#demoWrapper textarea{
+  padding-bottom: 2px;
+  font-size: 24px;
+}
+
+#codeArea textarea{
+  margin-top: 20px;
+}
+
+#demoWrapper button{
+  font-size: 24px;
+}
+
+#demoWrapper{
+  width:80%;
+  margin:100px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+#settings, #codeArea{
+  background-color: #222;
+  border-bottom: 1px solid #000;
+  box-shadow: 0px 2px 3px #777;
+  color:#fff;
+}
+
+#copyCodeSnippet{
+  position: absolute;
+  right: 18px;
+  top: 30px;
+  font-size: 18px;
+}
+
+.place::before{
+  color:#fff !important;
+}
