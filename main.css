@@ -13,13 +13,6 @@ section{
   position: relative;
 }
 
-input{
-  width:100%;
-  white-space: nowrap;
-  margin: 10px 0px 15px 0px;
-  font-size: 14px;
-}
-
 textarea{
   width: 100%;
 }
@@ -30,7 +23,11 @@ textarea{
 }
 
 #codeArea textarea{
+  width:calc(100% - 40px);
+  padding: 20px;
   margin-top: 20px;
+  resize: none;
+  outline: none;
 }
 
 #demoWrapper button{
@@ -39,9 +36,13 @@ textarea{
 
 #demoWrapper{
   width:80%;
-  margin:100px auto;
+  margin:50px auto 20px;
   position: relative;
   overflow: hidden;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+
 }
 
 #settings, #codeArea{
@@ -60,4 +61,62 @@ textarea{
 
 .place::before{
   color:#fff !important;
+}
+
+/** shoutout to fireship.io for the tutorial on this style of animation **/
+.field{
+  width: 100%;
+  position: relative;
+  border-bottom: 1px dashed #777;
+  margin: 2.5rem auto;
+}
+
+.field input{
+  width:100%;
+  outline: none;
+  border:none;
+  overflow:hidden;
+  padding: 0.15rem 0;
+  background: none;
+  color:#fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  z-index: 15;
+}
+
+.field::after{
+  content:"";
+  position: relative;
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #be0116;
+  transform: scaleX(0);
+  transform-origin: 10%;
+  transition: transform 300ms ease;
+  top:2px;
+}
+
+.field:focus-within{
+  border-color: transparent;
+}
+
+.field:focus-within::after{
+  transform: scaleX(1);
+  transition: transform 200ms ease;
+}
+
+.field label{
+  z-index: 0;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  transform: translateY(-1rem);
+  transform-origin: 0%;
+  transition: transform 200ms;
+  user-select: none;
+}
+.field:focus-within label,
+.field input:not(:placeholder-shown) + label{
+  transform: scale(0.8) translateY(-3rem);
 }

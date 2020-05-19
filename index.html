@@ -9,14 +9,28 @@
   <body>
     <section id="settings">
       <h1>Custom Field Settings</h1>
-      <input type="text" name="unique" id="unique" value="" placeholder="Unique Key (required to work)">
-      <input type="text" name="title" id="sectionTitle" value="" placeholder="Title (optional)">
-      <input type="text" name="subTitle" id="subTitle" value="" placeholder="SubTitle (optional)">
-      <input type="text" name="copyString" id="copyString" value="" placeholder="Text to be copied (required to work)">
+      <form autocomplete="off">
+        <div class="field">
+          <input type="text" name="unique" id="unique" value="" placeholder=" " spellcheck="false" />
+          <label for="unique">Unique Key (required)</label>
+        </div>
+        <div class="field">
+          <input type="text" name="sectionTitle" id="sectionTitle" value="" placeholder=" " />
+          <label for="sectionTitle">Title (optional)</label>
+        </div>
+        <div class="field">
+          <input type="text" name="subTitle" id="subTitle" value="" placeholder=" " />
+          <label for="subTitle">SubTitle (optional)</label>
+        </div>
+        <div class="field">
+          <input type="text" name="copyString" id="copyString" value="" placeholder=" " />
+          <label for="copyString">Text to be copied (required to work)</label>
+        </div>
+      </form>
     </section>
 
     <section id="demo">
-      <h1>Live Demo View</h1>
+      <h1>Live View</h1>
       <div id="demoWrapper">
 
       </div>
@@ -24,7 +38,7 @@
     <section id="codeArea">
       <h1>HTML for Moodle LMS Label</h1>
       <button id="copyCodeSnippet">Copy the Code</button>
-      <textarea name="codeblock" id="codeblock" rows="25"></textarea>
+      <textarea name="codeblock" id="codeblock" rows="25" readonly></textarea>
       <p>Created by Jeremy.Skrdlant@nwktc.edu</p>
     </section>
 

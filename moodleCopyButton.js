@@ -17,7 +17,7 @@ function updateDemoAndCode(){
   }
 
  finalString += `<div style="position:relative">
-      <textarea readonly id="clone-${unique}" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
+      <textarea readonly id="clone-${unique}" rows="1" style="background-color:#444;outline:none;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
       <button id="copy-${unique}" style="background-color:#CE1126; color:#FFF; border-radius:5px 0px 0px 5px;display:inline-block;position:absolute;right:0px; top:1px; padding:0px 10px;border: solid #000 2px; cursor:pointer; box-shadow:inset 2px 0px 3px #e34;text-shadow:0px 1px 1px #000;outline:none;">
           Copy
       </button>
@@ -39,7 +39,7 @@ function updateDemoAndCode(){
 
   let demoString = `${titleArea} ${subtitleArea}
   <div style="position:relative">
-      <textarea readonly id="clone" rows="1" style="background-color:#444;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
+      <textarea readonly id="clone" rows="1" style="background-color:#444;outline:none;color:#fff; font-weight:400;resize:none;cursor:text; border:solid 1px #000;box-shadow:inset 0px 0px 5px #000;padding-left:10px;text-shadow:0px 1px 1px #000;font-family:sans-serif;">${copyString}</textarea>
       <button id="copy" style="background-color:#CE1126; color:#FFF; border-radius:5px 0px 0px 5px;display:inline-block;position:absolute;right:0px; top:1px; padding:0px 10px;border: solid #000 2px; cursor:pointer; box-shadow:inset 2px 0px 3px #e34;text-shadow:0px 1px 1px #000;outline:none;">
           Copy
       </button>
